@@ -1,0 +1,41 @@
+---
+import { getUrlWithBase } from "../../utils";
+import { Tags } from "lucide-astro";
+
+type Props = {
+  tags: string[];
+  small?: boolean;
+  left?: boolean;
+  asAnchor?: boolean;
+};
+
+const { tags, small, left, asAnchor } = Astro.props;
+const filteredTags = tags.reduce<string[]>((acc, el) => {
+  if (acc.includes(el)) {
+    return acc;
+  }
+  acc.push(el);
+  return acc;
+}, []);
+---
+
+<ul
+  class={`list-none flex items-center gap-2 flex-wrap w-full lg:max-w-[70%] ${left ? "justify-start" : "justify-end"}`}
+>
+  <span class={`text-primary text-opacity-80 ${small && "text-sm"}`}>
+    <Tags />
+  </span>
+  {
+    filteredTags.map((tag) => {
+      return (
+        <li class={`text-primary text-opacity-80 ${small && "text-sm"}`}>
+          {asAnchor ? (
+            <a href={getUrlWithBase(`/blog/tag/${tag}/`)}>[{tag}]</a>
+          ) : (
+            <span>{tag}</span>
+          )}
+        </li>
+      );
+    })
+  }
+</ul>

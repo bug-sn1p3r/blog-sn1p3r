@@ -1,0 +1,48 @@
+---
+import { SITE_TITLE, SITE_DESCRIPTION } from "../../consts";
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import BlogCard from "../../components/BlogCard.astro";
+import TagNavigation from "../../components/tags/TagNavigation.astro";
+
+const posts = (await getCollection("blog")).sort(
+  (a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
+);
+
+const tags = posts
+  .map((post) => post.data.tags)
+  .flat()
+  .reduce<string[]>((acc, el) => {
+    if (acc.includes(el)) {
+      return acc;
+    }
+    acc.push(el);
+    return acc;
+  }, [])
+  .sort((a, b) => (a < b ? -1 : a > b ? 1 : 0));
+---
+
+<BaseLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
+  <main class="py-4 w-full">
+    <header class="pt-4 pb-8">
+      <TagNavigation tags={tags} />
+    </header>
+    <section class="gap-6 grid grid-cols-5 auto-rows-[164px]">
+      {
+        posts.map((post, index) => {
+          return (
+            <BlogCard
+              postType={post.data.postType || ""}
+              slug={post.slug}
+              index={index}
+              title={post.data.title}
+              description={post.data.description}
+              tags={post.data.tags || []}
+              date={post.data.pubDate}
+            />
+          );
+        })
+      }
+    </section>
+  </main>
+</BaseLayout>

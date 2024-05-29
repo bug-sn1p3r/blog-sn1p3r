@@ -1,0 +1,60 @@
+---
+import type { MarkdownHeading } from "astro";
+import TocHeading from "./TocHeading.astro";
+import type { MarkdownHeadingWithSubs } from "../../types";
+
+type Props = {
+  headings: MarkdownHeading[];
+};
+
+const { headings } = Astro.props;
+
+const buildHierarchy = (headings: MarkdownHeading[]) => {
+  const toc: MarkdownHeadingWithSubs[] = [];
+
+  const parentHeadings = new Map();
+
+  if (!headings) return toc;
+
+  headings.forEach((h: any) => {
+    const heading = { ...h, subheadings: [] };
+    parentHeadings.set(heading.depth, heading);
+
+    if (heading.depth > 3) {
+      return;
+    }
+
+    if (heading.depth === 2) {
+      toc.push(heading);
+    } else {
+      const parent = parentHeadings.get(heading.depth - 1);
+
+      if (!parent) {
+        return;
+      }
+
+      if (!parent?.subheadings) {
+        parent.subheadings = [];
+      }
+
+      parent.subheadings.push(heading);
+    }
+  });
+
+  return toc;
+};
+
+const toc = buildHierarchy(headings);
+---
+
+{
+  toc && toc.length > 0 && (
+    <nav class="toc px-6 py-3">
+      <ul class="toc-tree">
+        {toc.map((heading, index) => (
+          <TocHeading heading={heading} index={index} />
+        ))}
+      </ul>
+    </nav>
+  )
+}

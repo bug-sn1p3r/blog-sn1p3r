@@ -1,0 +1,30 @@
+---
+import type { MarkdownHeadingWithSubs } from "../../types";
+
+type Props = {
+  index: number;
+  subIndex?: number;
+  heading: MarkdownHeadingWithSubs;
+};
+
+const { heading, index, subIndex } = Astro.props;
+---
+
+<li>
+  <a
+    class="lg:text-sm border-b border-transparent hover:border-primary transition-all"
+    href={`#${heading.slug}`}
+    >{index + 1}.{subIndex !== undefined ? `${subIndex + 1}.` : ""}{
+      heading.text
+    }</a
+  >
+  <ul class="py-1">
+    {
+      heading.subheadings &&
+        heading.subheadings.length > 0 &&
+        heading.subheadings.map((subhead, subIndex) => (
+          <Astro.self heading={subhead} index={index} subIndex={subIndex} />
+        ))
+    }
+  </ul>
+</li>

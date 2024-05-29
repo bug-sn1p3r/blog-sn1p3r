@@ -1,0 +1,30 @@
+---
+import type { MarkdownHeading } from "astro";
+import { ScrollText } from "lucide-astro";
+import TocModal from "./TocModal.astro";
+import TocList from "./TocList.astro";
+
+type Props = {
+  headings: MarkdownHeading[];
+};
+
+const { headings } = Astro.props;
+---
+
+<div class="hidden lg:block max-w-[24%] min-w-[24%]">
+  <aside class="sticky top-[6%] right-0">
+    <h4
+      class="text-primary font-semibold p-2 flex items-center gap-2 bg-primary bg-opacity-20 rounded-lg"
+    >
+      <ScrollText /> Table of content
+    </h4>
+    <TocList headings={headings} />
+  </aside>
+</div>
+
+<TocModal>
+  <h4 class="font-bold text-xl p-2 flex items-center gap-2">
+    Table of content
+  </h4>
+  <TocList headings={headings} />
+</TocModal>

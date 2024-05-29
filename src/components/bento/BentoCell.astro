@@ -1,0 +1,43 @@
+---
+import type { PostMetadata } from "../../types";
+import { getUrlWithBase } from "../../utils";
+import BlogIcon from "../BlogIcon.astro";
+import FormattedDate from "../FormattedDate.astro";
+import TagList from "../tags/TagList.astro";
+import BentoLine from "./BentoLine.astro";
+
+interface Props extends PostMetadata {}
+
+const post = Astro.props;
+---
+
+<a
+  href={getUrlWithBase(`blog/${post.slug}`)}
+  class="bento-basic group flex-col col-span-2 row-span-1 hidden lg:flex"
+>
+  <div class="flex gap-2 h-full">
+    <span
+      class="bg-primary bg-opacity-20 p-1 rounded text-primary text-opacity-80 group-hover:bg-opacity-40 group-hover:text-opacity-100 h-full items-center flex"
+    >
+      <BlogIcon postType={post.postType} />
+    </span>
+    <section class="h-full flex flex-col flex-grow">
+      <h2
+        class="text-contentDefault text-ellipsis line-clamp-2 text-2xl flex-grow"
+      >
+        {post.title}
+      </h2>
+      <div class="flex items-end justify-between w-full">
+        <span class="min-w-[30%] max-w-[30%] w-full">
+          <FormattedDate date={post.date} />
+        </span>
+        {
+          post.tags && post.tags.length > 0 && (
+            <TagList tags={post.tags} small />
+          )
+        }
+      </div>
+    </section>
+  </div>
+</a>
+<BentoLine {...{ ...post, class: "flex lg:hidden col-span-5 lg:col-span-3" }} />

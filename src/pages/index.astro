@@ -1,0 +1,108 @@
+---
+import { getCollection } from "astro:content";
+import WorldMap from "../components/WorldMap.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import BentoLine from "../components/bento/BentoLine.astro";
+
+const posts = await getCollection("blog");
+const postTypes = posts.map((p) => p.data.postType);
+
+const lastPostByGlobalCategory = postTypes.reduce<
+  Record<
+    string,
+    Array<{
+      slug: string;
+      data: {
+        title: string;
+        description: string;
+        pubDate: Date;
+        tags: string[];
+      };
+    }>
+  >
+>((acc, el) => {
+  acc[el] = posts
+    .filter((p) => p.data.postType === el)
+    .sort((a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf())
+    .slice(0, 3);
+  return acc;
+}, {});
+---
+
+<BaseLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
+  <main class="w-full">
+    <div
+      class="w-full relative flex items-center justify-center lg:justify-end"
+    >
+      <WorldMap />
+      <div
+        class="flex flex-col justify-end lg:justify-center items-center lg:items-start gap-4 absolute left-0 top-1/2 lg:top-0 h-full w-full lg:w-auto"
+      >
+        <h1 class="text-center text-6xl lg:text-8xl font-bold uppercase">
+          The Tech Blog
+        </h1>
+        <h2 class="text-center font-title text-xl lg:text-3xl uppercase title">
+          [hack the world]
+        </h2>
+      </div>
+    </div>
+
+    <div class="w-full flex flex-col gap-4 py-32 lg:py-4">
+      {
+        Object.keys(lastPostByGlobalCategory).map((lPost) => {
+          return (
+            <>
+              <section class="flex flex-col gap-4 py-4">
+                <h2 class="text-2xl font-bold">{`Last of <${lPost}/>`}</h2>
+                <nav class="flex flex-col gap-2">
+                  {lastPostByGlobalCategory[lPost].map((post) => {
+                    return (
+                      <BentoLine
+                        {...{
+                          ...post.data,
+                          class: "flex w-full",
+                          index: 0,
+                          slug: post.slug,
+                          postType: lPost,
+                          date: post.data.pubDate,
+                        }}
+                      />
+                    );
+                  })}
+                </nav>
+              </section>
+              <hr class="border-contentSubtle border-opacity-40" />
+            </>
+          );
+        })
+      }
+    </div>
+  </main>
+</BaseLayout>
+
+<script>
+  import { TextScramble } from "../effects";
+
+  const phrases = [
+    "[hack the world]",
+    "trust no one",
+    "</stay-anonymous>",
+    "exploit the system",
+    "system breach",
+    "./firewall master",
+  ];
+
+  const el = document.querySelector(".title") as HTMLElement;
+  const fx = new TextScramble(el);
+
+  let counter = 0;
+  const next = () => {
+    fx.setText(phrases[counter]).then(() => {
+      setTimeout(next, 5000);
+    });
+    counter = (counter + 1) % phrases.length;
+  };
+
+  next();
+</script>

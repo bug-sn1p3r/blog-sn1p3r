@@ -1,0 +1,22 @@
+---
+import BlogIcon from "../BlogIcon.astro";
+import FormattedDate from "../FormattedDate.astro";
+
+type Props = {
+  pubDate: Date;
+  postType: string;
+};
+
+const { pubDate, postType } = Astro.props;
+---
+
+<div class="py-2 flex items-center justify-between">
+  <FormattedDate date={pubDate} />
+  {
+    postType && (
+      <span class="bg-primary bg-opacity-20 p-1 rounded text-primary text-opacity-80  flex gap-2">
+        <BlogIcon postType={postType} /> {postType}
+      </span>
+    )
+  }
+</div>

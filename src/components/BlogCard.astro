@@ -1,0 +1,40 @@
+---
+import type { PostMetadata } from "../types";
+import BentoLine from "./bento/BentoLine.astro";
+import BentoCell from "./bento/BentoCell.astro";
+import BentoBox from "./bento/BentoBox.astro";
+
+interface Props extends PostMetadata {}
+const post = Astro.props;
+
+const bentoValues = {
+  0: "bento-line",
+  1: "bento-cell",
+  2: "bento-box",
+  3: "bento-line",
+  4: "bento-line",
+  5: "bento-line",
+  6: "bento-box",
+  7: "bento-line",
+  8: "bento-cell",
+  9: "bento-line",
+  10: "bento-line",
+};
+
+const getSpan = (index: number) => {
+  const keys = Object.keys(bentoValues);
+  const keyIndex = index % keys.length;
+  const key = keys[keyIndex];
+  return bentoValues[key];
+};
+
+const target = getSpan(post.index);
+---
+
+{
+  target === "bento-line" && (
+    <BentoLine {...{ ...post, class: "flex col-span-5 lg:col-span-3" }} />
+  )
+}
+{target === "bento-cell" && <BentoCell {...post} />}
+{target === "bento-box" && <BentoBox {...post} />}

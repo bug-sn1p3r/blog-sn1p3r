@@ -1,0 +1,25 @@
+---
+import type { MarkdownHeading } from "astro";
+import type { CollectionEntry } from "astro:content";
+import TagList from "../tags/TagList.astro";
+import BlogMeta from "./BlogMeta.astro";
+
+type Props = CollectionEntry<"blog">["data"] & {
+  headings: MarkdownHeading[];
+};
+
+const { pubDate, postType, tags, title, description } = Astro.props;
+---
+
+<header class="w-full">
+  <BlogMeta pubDate={pubDate} postType={postType} />
+
+  <h1 class="text-5xl lg:text-6xl font-bold py-2 w-full break-words">
+    {title}
+  </h1>
+  <h2 class="text-xl break-words text-contentSubtle">{description}</h2>
+
+  <div class="w-full flex items-center justify-start py-4">
+    {tags && <TagList tags={tags} left asAnchor />}
+  </div>
+</header>

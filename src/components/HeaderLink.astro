@@ -1,0 +1,13 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+type Props = HTMLAttributes<"a">;
+
+const { href, ...props } = Astro.props;
+---
+
+<li class="group relative">
+  <a href={href} class={`group-hover:text-primary head-link`} {...props}>
+    <slot />
+  </a>
+</li>

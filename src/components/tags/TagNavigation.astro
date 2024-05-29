@@ -1,0 +1,31 @@
+---
+import { ChevronLeft } from "lucide-astro";
+import { getUrlWithBase } from "../../utils";
+
+interface Props {
+  tags: string[];
+}
+
+const { tags } = Astro.props;
+---
+
+<details>
+  <summary
+    class="border-b border-contentSubtle border-opacity-40 py-1 flex items-center justify-between hover:text-primary hover:border-primary transition-all"
+    ><span>TAGS</span><span class="icon">
+      <ChevronLeft />
+    </span></summary
+  >
+  <nav class="flex flex-wrap gap-2 w-full py-2">
+    {
+      tags.map((tag) => (
+        <a
+          href={getUrlWithBase(`blog/tag/${tag.toLocaleLowerCase()}`)}
+          class="bg-primary bg-opacity-20 rounded-lg text-primary py-1 px-2"
+        >
+          {tag}
+        </a>
+      ))
+    }
+  </nav>
+</details>

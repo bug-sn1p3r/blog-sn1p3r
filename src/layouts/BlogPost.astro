@@ -1,0 +1,55 @@
+---
+import type { CollectionEntry } from "astro:content";
+import BaseLayout from "./BaseLayout.astro";
+import type { MarkdownHeading } from "astro";
+import Toc from "../components/toc/Toc.astro";
+import Utterances from "../components/Utterances.astro";
+import BlogHeader from "../components/blog-content/BlogHeader.astro";
+
+type Props = CollectionEntry<"blog">["data"] & {
+  headings: MarkdownHeading[];
+};
+
+const props = Astro.props;
+const { title, description, headings } = props;
+---
+
+<BaseLayout title={title} description={description}>
+  <main>
+    <BlogHeader {...props} />
+    <hr class="mb-8 mt-4 border-contentSubtle border-opacity-40" />
+    <article class="flex flex-row-reverse gap-4 w-full">
+      {headings && headings.length > 1 && <Toc headings={headings} />}
+      <div
+        class={`prose prose-invert lg:prose-xl prose-h2:border-b prose-h2:w-full prose-h2:border-contentSubtle prose-h2:border-opacity-40 prose-h2:py-2 prose-h2:mt-6 lg:prose-h2:mt-12  max-w-none ${headings && headings.length > 1 ? "w-full lg:max-w-[75%] lg:min-w-[75%" : "w-full"}`}
+      >
+        <slot />
+      </div>
+    </article>
+    <Utterances />
+  </main>
+
+  <script>
+    addIntersectionObserver();
+
+    function addIntersectionObserver() {
+      const observer = new IntersectionObserver((sections) => {
+        sections.forEach((section) => {
+          const heading = section.target.querySelector("h2, h3");
+          if (!heading) return;
+          const id = heading.getAttribute("id");
+
+          const link = document.querySelectorAll(`.toc li a[href="#${id}"]`);
+          if (!link || link.length <= 0) return;
+
+          const addRemove = section.isIntersecting ? "add" : "remove";
+          link.forEach((l) => l.classList[addRemove]("text-primary"));
+        });
+      });
+
+      document.querySelectorAll(".prose section").forEach((section) => {
+        observer.observe(section);
+      });
+    }
+  </script>
+</BaseLayout>

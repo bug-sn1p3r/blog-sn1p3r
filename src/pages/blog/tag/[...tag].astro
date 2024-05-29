@@ -1,0 +1,77 @@
+---
+import { type CollectionEntry, getCollection } from "astro:content";
+import BlogCard from "../../../components/BlogCard.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../../../consts";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import { getUrlWithBase } from "../../../utils";
+import { ChevronLeft } from "lucide-astro";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+  const tags: string[] = [];
+
+  posts.forEach((post) => {
+    post.data.tags?.forEach((tag) => {
+      tags.push(tag.toLowerCase().trim());
+    });
+  });
+
+  return Array.from(new Set(tags))
+    .reduce<string[]>((acc, el) => {
+      if (acc.includes(el)) {
+        return acc;
+      }
+      acc.push(el);
+      return acc;
+    }, [])
+    .map((tag) => {
+      return {
+        params: { tag },
+        props: {
+          tag,
+          blogposts: posts.filter((post) =>
+            post.data.tags.map((tag) => tag.toLowerCase()).includes(tag)
+          ),
+        },
+      };
+    });
+}
+
+type Props = {
+  tag: string;
+  blogposts: CollectionEntry<"blog">[];
+};
+
+const { blogposts, tag } = Astro.props;
+---
+
+<BaseLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
+  <main class="py-4 w-full">
+    <header class="w-full flex items-center justify-between flex-wrap">
+      <a
+        href={getUrlWithBase("blog/")}
+        class="flex items-center gap-1 hover:text-primary transition-all"
+        ><ChevronLeft /> return</a
+      >
+      <h1 class="text-4xl font-bold py-4">./{tag}</h1>
+    </header>
+
+    <section class="gap-6 grid grid-cols-5 auto-rows-[164px]">
+      {
+        blogposts.map((post, index) => {
+          return (
+            <BlogCard
+              postType={post.data.postType || ""}
+              slug={post.slug}
+              index={index}
+              title={post.data.title}
+              description={post.data.description}
+              tags={post.data.tags || []}
+              date={post.data.pubDate}
+            />
+          );
+        })
+      }
+    </section>
+  </main>
+</BaseLayout>

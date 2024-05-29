@@ -1,0 +1,19 @@
+---
+import {
+  FileCode2,
+  Shield,
+  SquareTerminal,
+  SquareChevronRight,
+} from "lucide-astro";
+
+type Props = {
+  postType: string;
+};
+
+const { postType } = Astro.props;
+---
+
+{postType === "programming" && <FileCode2 />}
+{postType === "security" && <Shield />}
+{postType === "hacking" && <SquareTerminal />}
+{postType === "" && <SquareChevronRight />}

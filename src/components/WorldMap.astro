@@ -1,0 +1,62 @@
+<canvas id="cobe" class="hidden lg:block w-[500px] h-[500px]"></canvas>
+<canvas id="cobe-small" class="block lg:hidden w-[400px] h-[200px] mx-auto"
+></canvas>
+
+<script>
+  import createGlobe, { type COBEOptions } from "cobe";
+  import tinycolor from "tinycolor2";
+  import { THEME } from "../consts";
+
+  let phi = 0;
+
+  const canvas = document.getElementById("cobe") as HTMLCanvasElement;
+  const canvasSmall = document.getElementById(
+    "cobe-small"
+  ) as HTMLCanvasElement;
+
+  const baseColor = tinycolor(THEME.primary).darken(36).toRgb();
+  const markerColor = tinycolor(THEME.primary).toRgb();
+  const glowColor = tinycolor(THEME.primary).darken(32).toRgb();
+
+  const toCobe = (tinyColor: tinycolor.ColorFormats.RGBA) => {
+    return Object.keys(tinyColor)
+      .filter((key) => key !== "a")
+      .map((key) => tinyColor[key] / 100) as [number, number, number];
+  };
+
+  const cobeOptions: COBEOptions = {
+    devicePixelRatio: 2,
+    width: 500,
+    height: 500,
+    phi: 0,
+    theta: 0,
+    dark: 1,
+    diffuse: 1.65,
+    scale: 2,
+    mapSamples: 16000,
+    mapBrightness: 12,
+    mapBaseBrightness: 0,
+    baseColor: toCobe(baseColor),
+    markerColor: toCobe(markerColor),
+    glowColor: toCobe(glowColor),
+    offset: [250, -250],
+    markers: [{ location: [4.1156735, -72.9301367], size: 0.1 }],
+    onRender: (state) => {
+      state.phi = phi;
+      phi += 0.005;
+    },
+  };
+
+  if (canvas) {
+    createGlobe(canvas, cobeOptions);
+  }
+
+  if (canvasSmall) {
+    createGlobe(canvasSmall, {
+      ...cobeOptions,
+      scale: 2,
+      offset: [200, 300],
+      width: 400,
+    });
+  }
+</script>

@@ -1,0 +1,42 @@
+---
+import { ScrollText, X } from "lucide-astro";
+---
+
+<button
+  id="toc-button"
+  class="block lg:hidden fixed right-0 bottom-0 m-6 z-10 text-primary bg-primary bg-opacity-20 ring-2 ring-primary p-1 rounded"
+>
+  <ScrollText />
+</button>
+
+<dialog
+  id="toc-modal"
+  class="backdrop:backdrop-blur-md w-full h-full bg-transparent"
+>
+  <div
+    class="m-auto w-11/12 h-full bg-backgroundSubtle rounded-lg p-4 overflow-auto"
+  >
+    <header class="w-full flex items-center justify-end">
+      <button
+        id="toc-close-modal"
+        class="text-primary bg-primary bg-opacity-20 ring-2 ring-primary p-1 rounded"
+        ><X /></button
+      >
+    </header>
+    <slot />
+  </div>
+</dialog>
+
+<script>
+  const $button = document.querySelector("#toc-button");
+  const $closeButton = document.querySelector("#toc-close-modal");
+  const $modal = document.querySelector("#toc-modal") as HTMLDialogElement;
+
+  $button?.addEventListener("click", () => {
+    $modal.showModal();
+  });
+
+  $closeButton?.addEventListener("click", () => {
+    $modal.close();
+  });
+</script>
