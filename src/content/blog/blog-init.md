@@ -9,12 +9,12 @@ tags:
 ---
 
 
-### Bienvenidos al Blog de h1p
+## Bienvenidos al Blog de h1p
 
 ¡Hola a todos! Bienvenidos al blog de h1p, he decidido sacar este espacio donde nos adentraremos en el amplio y extenso mundo del hacking, Bugbounty programs, y, por supuesto, mucho pero mucho pentesting web. En este primer post, quiero compartir un poco sobre mi personalidad, mis intereses y por qué me apasiona tanto el hacking y el bug bounty.
 
 
-#### Mi Viaje en el Mundo del Hacking
+### Mi Viaje en el Mundo del Hacking
 Llevo más de 14 años inmerso en el mundo de la ciberseguridad. Desde los 13 años, siempre me han encantado las computadoras, los videojuegos, la programación y, en especial, el hacking. Recuerdo que todo comenzó mientras jugaba un juego de computadora que me pedía esperar 24 horas para recargar los intentos de juego. Me di cuenta de que esta condición estaba basada en la hora del sistema, así que decidí cambiar la hora al día siguiente. ¡Y funcionó! Ese momento despertó en mí una curiosidad insaciable por las computadores 💻, mas alla de entender como funcionan siento conexion con las computadores.
 
 ### Primeros Pasos y Curiosidades
