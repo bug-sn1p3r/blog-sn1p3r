@@ -34,3 +34,5 @@ Cuando empecé en el hacking, solía defacear "desfigurar" sitios aprovechando a
 La intención de este blog es compartir un poco de mi conocimiento y que esto repercuta en las nuevas generaciones de personas que entran en la comunidad. Veremos de todo: exploits, CVE, código, scripts, bug hunting en vivo, y muchas cosas más.
 
 Espero que este espacio se convierta en una fuente de inspiración y aprendizaje para todos aquellos que, como yo, sienten una gran pasión por la ciberseguridad, recuerden no somos piratas ciberneticos, tampoco APT´s , nosotros somos hackers y eso nos hace muy diferentes y particulares en nuestra especie, en resumen los <mark>"raritos"</mark>.
+
+¡Nos vemos en el próximo post!
