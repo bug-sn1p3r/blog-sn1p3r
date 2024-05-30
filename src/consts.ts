@@ -9,8 +9,8 @@ export const THEME = {
   contentDefault: "#ffffff",
 };
 
-export const GITHUB_PROFILE_URL = "https://github.com/bug-sn1p3r"; // el link del github
-export const TWITTER_PROFILE_URL = "https://x.com/hipdead010"; // el link del twitter si quiere
+export const GITHUB_PROFILE_URL = "https://github.com/bug-sn1p3r"; 
+export const TWITTER_PROFILE_URL = "https://x.com/hipdead010"; 
 export const AUTHOR = "TechBoy";
 
 export const SITE = "https://bug-sn1p3r.github.io";
