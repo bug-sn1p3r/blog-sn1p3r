@@ -9,9 +9,9 @@ export const THEME = {
   contentDefault: "#ffffff",
 };
 
-export const GITHUB_PROFILE_URL = "https://github.com/bug-sn1p3r"; 
-export const TWITTER_PROFILE_URL = "https://x.com/hipdead010"; 
-export const AUTHOR = "TechBoy";
+export const GITHUB_PROFILE_URL = "https://github.com/bug-sn1p3r";
+export const TWITTER_PROFILE_URL = "https://x.com/hipdead010";
+export const AUTHOR = "h1p";
 
 export const SITE = "https://blog-sn1p3r.tech";
 export const BASE = "/";

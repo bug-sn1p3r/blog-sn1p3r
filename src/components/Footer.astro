@@ -1,10 +1,20 @@
 ---
 import { AUTHOR } from "../consts";
+import BuyCoffee from "./BuyCoffee.astro";
+import ViewsCounter from "./ViewsCounter.astro";
 
 const today = new Date();
 ---
 
-<footer class="w-full py-12 flex items-center justify-center">
-  &copy; {today.getFullYear()}
-  {AUTHOR}. All rights reserved.
+<footer class="w-full py-12 flex items-center gap-4">
+  <div class="flex-grow basis-0">
+    <ViewsCounter />
+  </div>
+  <p class="text-center">
+    &copy; {today.getFullYear()}
+    {AUTHOR}. All rights reserved.
+  </p>
+  <div class="flex-grow basis-0 flex items-center justify-end">
+    <BuyCoffee />
+  </div>
 </footer>

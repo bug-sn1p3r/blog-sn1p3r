@@ -86,9 +86,26 @@ details summary .icon {
 	transition: transform .2s;
 }
 
+.bmc-btn{
+	height: 2rem !important;
+	width: 2rem !important;
+}
+
+
 
 @layer components {
 	.bento-basic {
 		@apply w-full ring-1 ring-contentSubtle ring-opacity-40 p-2 rounded-lg hover:bg-primary hover:bg-opacity-10 hover:ring-opacity-60 hover:ring-primary transition hover:cursor-pointer
+	}
+}
+
+@layer utils{
+	.bmc-btn{
+		@apply !text-sm !font-app !rounded-lg !bg-primary !bg-opacity-40 hover:!bg-opacity-50 hover:!scale-105 transition-all
+	}
+	
+	.bmc-btn-text
+	{
+		@apply !font-app
 	}
 }
