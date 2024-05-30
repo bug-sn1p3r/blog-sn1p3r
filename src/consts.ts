@@ -13,5 +13,5 @@ export const GITHUB_PROFILE_URL = "https://github.com/bug-sn1p3r";
 export const TWITTER_PROFILE_URL = "https://x.com/hipdead010"; 
 export const AUTHOR = "TechBoy";
 
-export const SITE = "https://bug-sn1p3r.github.io";
-export const BASE = "/blog-sn1p3r";
+export const SITE = "https://blog-sn1p3r.tech";
+export const BASE = "/";
