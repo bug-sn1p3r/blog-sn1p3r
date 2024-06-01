@@ -30,7 +30,7 @@ const filteredTags = tags.reduce<string[]>((acc, el) => {
       return (
         <li class={`text-primary text-opacity-80 ${small && "text-sm"}`}>
           {asAnchor ? (
-            <a href={getUrlWithBase(`/blog/tag/${tag}/`)}>[{tag}]</a>
+            <a href={getUrlWithBase(`blog/tag/${tag}/`)}>[{tag}]</a>
           ) : (
             <span>{tag}</span>
           )}
