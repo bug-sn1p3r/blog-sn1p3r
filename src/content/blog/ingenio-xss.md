@@ -5,11 +5,11 @@ pubDate: "Jun 02 2024"
 heroImage: "/blog-placeholder-1.jpg"
 postType: "hacking"
 tags:
-  - XSS
-  - Payloads
-  - Tools
-  - Waymore
-  - Paramspider
+  - xss
+  - payloads
+  - tools
+  - waymore
+  - paramspider
 ---
 
 
