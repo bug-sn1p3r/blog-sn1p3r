@@ -30,6 +30,10 @@ import { getUrlWithBase } from "../utils";
       <HeaderLink href={getUrlWithBase("")}>HOME</HeaderLink>
       <span>|</span>
       <HeaderLink href={getUrlWithBase("blog/")}>BLOG</HeaderLink>
+      <span>|</span>
+      <HeaderLink href={getUrlWithBase("blog/aviso_legal")}
+        >AVISO LEGAL</HeaderLink
+      >
     </ul>
     <ul
       class="hidden md:flex md:flex-grow md:basis-0 items-center justify-end gap-4"
@@ -46,7 +50,7 @@ import { getUrlWithBase } from "../utils";
 
 <script>
   const links = document.querySelectorAll(
-    ".head-link"
+    ".head-link",
   ) as NodeListOf<HTMLAnchorElement>;
   const pathname = location.href;
   const className = "text-primary";

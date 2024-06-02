@@ -6,7 +6,7 @@ const blog = defineCollection({
     title: z.string(),
     description: z.string(),
     pubDate: z.coerce.date(),
-    postType: z.enum(["security", "programming", "hacking"]),
+    postType: z.enum(["security", "programming", "hacking", "terms"]),
     tags: z
       .array(
         z

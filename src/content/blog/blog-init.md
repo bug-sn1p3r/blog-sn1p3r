@@ -1,7 +1,7 @@
 ---
 title: "Iniciando el blog de h1p 👽"
 description: "Bienvenidos al inicio del blog, preparate un cafe y toma asiento, ahora si viene lo bueno"
-pubDate: "May 28 2025"
+pubDate: "May 28 2024"
 heroImage: "/blog-placeholder-1.jpg"
 postType: "hacking"
 tags:
