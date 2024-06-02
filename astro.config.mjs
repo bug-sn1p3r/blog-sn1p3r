@@ -1,11 +1,10 @@
-import { defineConfig } from "astro/config";
+import { defineConfig, passthroughImageService } from "astro/config";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
 import expressiveCode from "astro-expressive-code";
 import sectionize from "@hbsnow/rehype-sectionize";
 import { BASE, SITE } from "./src/consts";
-import { defineConfig, passthroughImageService } from 'astro/config';
 
 
 export default defineConfig({
