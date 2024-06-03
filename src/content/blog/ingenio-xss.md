@@ -1,6 +1,6 @@
 ---
-title: "Detras del escenario - Tecnicas XSS #1  "
-description: "En este Post exploraremos el ingenio y las técnicas basicas detrás de la busqueda de vulnerabilidades XSS, tambien usaremos herramientas para busqueda masiva de endpoints donde posiblemente se pueda explotar XSS."
+title: "Detras del escenario - Tecnicas XSS #1"
+description: "En este Post exploraremos el ingenio y las técnicas basicas detrás de la busqueda de vulnerabilidades XSS, tambien usaremos herramientas para busqueda masiva de endpoints donde posiblemente se pueda explotar XSS reflectivo."
 pubDate: "Jun 02 2024"
 heroImage: "/blog-placeholder-1.jpg"
 postType: "hacking"
@@ -15,9 +15,11 @@ tags:
 
 ## Introducción al XSS
 
+En esta primer parte haremos un poco de *Recon* utilizando herramientas de **FingerPrinter** como **Waymore** y **Paramspider** con esto colectaremos todos los puntos finales, la explotación será manual donde utilizaremos un proxy para interceptar todas las peticiones para evaluacion o revision manual mas a profundidad.
+
 El **Cross-Site Scripting** (**XSS**) es una vulnerabilidad de seguridad web o componentes webs, ya que el impacto se ve reflejado en el navegador de la víctima, esto lo que permite es a los atacantes **inyectar** 💉 scripts maliciosos en los navegadores de las víctimas.
 
-Un análisis realizado por Owasp Top 10 2021 nos dice que la inyección en el 94% de las solicitudes fueron probadas para algún tipo de inyección, con una tasa de incidencia máxima del 19%, una tasa de incidencia promedio del 3% y 274,000 ocurrencias. Las enumeraciones de debilidades comunes (CWE) notables incluyen:
+Un análisis realizado por Owasp Top 10 2021 nos dice que la inyección en el 94% de las solicitudes fueron probadas para algún tipo de inyección, con una tasa de incidencia máxima del 19%, una tasa de incidencia promedio del 3% y 274,000 ocurrencias. Las enumeraciones de vulnerabilidades comunes (CWE) notables incluyen:
 
 - CWE-79: **Cross-Site Scripting (XSS)**
 - CWE-89: SQL Injection
@@ -26,12 +28,8 @@ Un análisis realizado por Owasp Top 10 2021 nos dice que la inyección en el 94
 [Fuente - owasp.org](https://owasp.org/Top10/A03_2021-Injection/)
 
 
-En esta primer parte haremos un poco de **Recon** utilizando herramientas y **Google Dorking** para colectar todos los puntos finales, y la explotación será manual donde.
-
-
 ## Tipos de XSS
-Antes de continuar es importante primero entender los tipos de XSS y como funciona cada variante de esta CWE, recordemos que en XSS se explota es prácticamente el navegador, 
-
+El foco de este post sera en xss reflectivos, ya que existen varios tipos y variantes de XSS.
 
 ### - rXSS o Cross Site scripting reflective
 
@@ -54,7 +52,7 @@ El **Blind XSS** este ocurre cuando la carga útil no se refleja directamente lo
 
 
 ## Tools
-una vez ya comprendiendo los tipos o contextos por los cuales se puede manifestar esta vulnerabilidad, ten en cuenta que esta primera parte será basada en XSS reflectivos, ahora bien las herramientas que utilizaremos en esta primera parte son estas:
+una vez ya comprendiendo los tipos o contextos por los cuales se puede manifestar esta vulnerabilidad, herramientas que utilizaremos en esta primera parte son estas:
 - [*Burpsuite*](https://portswigger.net/burp/communitydownload) From Portswigger
 - [*Logger ++*](https://portswigger.net/bappstore/470b7057b86f41c396a97903377f3d81) From Portswigger
 - [*paramspider*](https://github.com/devanshbatham/ParamSpider) From Github
@@ -65,7 +63,7 @@ una vez ya comprendiendo los tipos o contextos por los cuales se puede manifesta
 - [*freq*](https://github.com/takshal/freq) From Github
 - [*Open Multiple URLS*](https://chromewebstore.google.com/detail/open-multiple-urls/oifijhaokejakekmnjmphonojcfkpbbh) From Extensions Google
 
-La metodología se basa en usar todas las **fingerprints** posibles, para buscar **endpoints** y colectar todos los parámetros reflejados posibles, esto lo haremos con **paramspider** + **waymore**, luego filtraremos con **uro** y **gf**, para posteriormente usar **qsreplace** + **freq** para enviar cargas útiles buscando cuál se refleja, luego pasaremos todas las urls colectadas por **open Múltiple URLS** con el proxy **Burp**, escuchando la idea es listar todas las urls que reflejan parámetros en el **Logger++** para luego realizar caza manual o validación manual.
+La metodología se basa en usar todas las **fingerprints** posibles, para buscar **endpoints** y colectar todos los parámetros reflejados posibles, esto lo haremos con **paramspider** + **waymore**, luego filtraremos con **uro** y **gf**, para posteriormente usar **qsreplace** + **freq** para enviar cargas útiles buscando cuál se refleja, luego pasaremos todas las urls colectadas por **open Múltiple URLS** con el proxy **Burp**,al escuchar todas las peticiones echas a todas las urls, la idea es listar todas las urls que reflejan parámetros en el **Logger++** para luego realizar caza manual o validación manual.
 
 ### Collect endpoints
 
@@ -115,7 +113,7 @@ cat urls.txt | gf xss | uro | qsreplace '"><img src=X onerror=alert(1);>' | freq
 
 ![alt text](./images/P2/4.png)
 
-Aquí concluye una parte de la automatización. Como pueden ver, es bastante efectiva, pero no es infalible, ya que a veces puede generar falsos positivos. No te desanimes; recuerda que cuando aparece "FOUND" es porque lo que enviaste con qsreplace se reflejó en freq. Ahora, pasaremos a la fase de caza manual para tratar de explotar todos los parámetros reflejados en busca de XSS y no confiar al 100% en los resultados de freq. Primero, abrimos el proxy Burp, instalamos la extensión Open Múltiple URLs en el navegador y Logger++ en Burp.
+Aquí concluye una parte de la automatización. Como pueden ver, es bastante útil, pero no es infalible, ya que a veces puede generar falsos positivos. Yo no me desanimo de lo contrario, cuando el parámetro enviado a qsreplace se refleje en freq, pero la carga útil no se refleje, ahi es donde mas me enfoco mas en la caza manual para tratar de explotar todos los parámetros reflejados en busca de XSS y no confiar al 100% en los resultados de freq. Primero, abrimos el proxy Burp, instalamos la extensión Open Múltiple URLs en el navegador y Logger++ en Burp.
 
 
 ## check manual Burpsuite + Logger++ + Open Múltiple Urls
@@ -128,13 +126,35 @@ me gusta marcar las opciones no cargar hasta abrir la pestaña, cargar en un ord
 
 ![alt text](./images/P2/6.png)
 
+---
+por ejemplo, tipico parametro que se refleja
+
+![alt text](./images/P2/9.png)
+
+
+Normalmente se comienza por tratar de romper la sintaxis, entonces se envian caracteres especiales como estos 
+
+```
+'
+"
+">
+\"
+```
+
 En esta parte es donde empiezas a construir la carga útil dependiendo de como te response el servidor según lo que le enviaste en el parámetro **reflejado**, puedes hacerlo no muy agresivo pero validando tags HTML como los siguientes
 
 ```javascript
 <img src=X>
-<embed src="https://evil.com/t.js">
+<embed src="X">
 <a href="">click me</a>
 ```
+
+de esta manera pude escapar de ahi
+```javascript
+XSS?';alert(1)
+```
+
+![alt text](./images/P2/10.png)
 
 También puedes usar estas tools online para codificar(**Unicode**, **Hex code**, **HTML code**, **HTML entity**) caracteres especiales por si hay escape o codificación en los parámetros recibidos.
 
@@ -152,6 +172,7 @@ Es muy importante entender que esta parte manual requiere enfoque en el comporta
 
 ![alt text](./images/P2/7.png)
 
+![alt text](./images/P2/8.png)
 
 ## Conclusión
 Aunque no es un post con técnicas avanzadas ni para expertos, indico las bases o por lo menos como iniciar en la búsqueda de XSS, la combinación de herramientas automatizadas y verificación manual es crucial para identificar y explotar vulnerabilidades XSS de manera efectiva. Aunque la automatización ayuda a ahorrar tiempo y a identificar posibles puntos de inyección, la revisión manual asegura la precisión y la validez de los hallazgos. La seguridad web es un campo dinámico y en constante evolución, por lo que mantenerse actualizado con las últimas técnicas y herramientas es fundamental para cualquier pentester web.
