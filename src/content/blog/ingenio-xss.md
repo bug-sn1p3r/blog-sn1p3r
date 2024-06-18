@@ -1,6 +1,6 @@
 ---
-title: "Detras del escenario - Tecnicas XSS #1"
-description: "En este Post exploraremos el ingenio y las técnicas basicas detrás de la busqueda de vulnerabilidades XSS, tambien usaremos herramientas para busqueda masiva de endpoints donde posiblemente se pueda explotar XSS reflectivo."
+title: "Detrás del escenario - Técnicas XSS #1"
+description: "En este Post exploraremos el ingenio y las técnicas básicas detrás de la búsqueda de vulnerabilidades XSS, también usaremos herramientas para búsqueda masiva de endpoints donde posiblemente se pueda explotar XSS reflectivo."
 pubDate: "Jun 02 2024"
 heroImage: "/blog-placeholder-1.jpg"
 postType: "hacking"
@@ -127,12 +127,12 @@ me gusta marcar las opciones no cargar hasta abrir la pestaña, cargar en un ord
 ![alt text](./images/P2/6.png)
 
 ---
-por ejemplo, tipico parametro que se refleja
+por ejemplo, típico parámetro que se refleja
 
 ![alt text](./images/P2/9.png)
 
 
-Normalmente se comienza por tratar de romper la sintaxis, entonces se envian caracteres especiales como estos 
+Normalmente se comienza por tratar de romper la sintaxis, entonces se envian caracteres especiales como estos
 
 ```
 '
