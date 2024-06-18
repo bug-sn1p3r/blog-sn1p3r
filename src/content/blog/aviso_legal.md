@@ -6,7 +6,7 @@ heroImage: "/blog-placeholder-1.jpg"
 postType: "terms"
 tags:
 - terms
-- etica
+- ética
 ---
 
 El contenido publicado en este blog tiene fines exclusivamente educativos y está destinado a proporcionar información sobre hacking ético, herramientas de seguridad, y metodologías de programas de recompensas por errores (bug bounty). Todo el material aquí presentado se ofrece con la intención de promover buenas prácticas de seguridad y una comprensión más profunda de la ciberseguridad.
@@ -22,3 +22,5 @@ Consecuencias Legales: El uso indebido de la información aquí proporcionada pu
 Consentimiento y Permisos: Cualquier prueba de técnicas de hacking o seguridad debe realizarse únicamente en entornos controlados y con el permiso explícito del propietario del sistema o red. Sin autorización, tales acciones son ilegales y antiéticas.
 
 Al continuar navegando por este blog, los usuarios aceptan y comprenden que deben utilizar la información de manera responsable y conforme a todas las leyes y regulaciones aplicables. Promovemos el uso del conocimiento para fortalecer la seguridad y no para explotarla.
+
+El propietario del blog se reserva la potestad de emprender acciones jurídicas contra las personas que infringen las políticas del blog.
