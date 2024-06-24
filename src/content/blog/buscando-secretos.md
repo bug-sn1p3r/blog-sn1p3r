@@ -14,7 +14,7 @@ tags:
 
 # Buscando secretos y credenciales
 
-Hoy en dia los desarrolladores y las empresas de desarrollo deben luchar dia a dia con la cantidad cada vez mayor de datos confidenciales, los que conocemos como secretos, *tokens*, *APIkeys*, *certificados de seguridad* o *credenciales*, ademas de variables de entorno y otro tipo de información sensible que no puedes exponer libremente o por lo menos no hacerla fácil de encontrar, ya que los atacantes puede utilizar esa información.
+Hoy en día los desarrolladores y las empresas de desarrollo deben luchar día a día con la cantidad cada vez mayor de datos confidenciales, los que conocemos como secretos, *tokens*, *APIkeys*, *certificados de seguridad* o *credenciales*, ademas de variables de entorno y otro tipo de información sensible que no puedes exponer libremente o por lo menos no hacerla fácil de encontrar, ya que los atacantes puede utilizar esa información.
 
 
 En este post quiero enseñar un poco de los métodos que utilizo para buscar secretos o credenciales. La búsqueda de secretos y credenciales es una técnica vital en el **BugBounty**, esto nos permite a los investigadores encontrar *información sensible* para demostrar que puede ser utilizada por atacantes o por lo menos tomarlo como un punto inicial en el **reporte de vulnerabilidades** en sistemas y servicios. A continuación, un pequeño repaso de las herramientas que utilizaremos en este post.
