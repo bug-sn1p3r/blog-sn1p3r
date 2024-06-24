@@ -17,6 +17,6 @@ const { Content, headings } = await post.render();
 const props = { ...post.data, headings };
 ---
 
-<BlogPost {...props}>
+<BlogPost {...props} image={props.heroImage}>
   <Content />
 </BlogPost>

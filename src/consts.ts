@@ -15,3 +15,4 @@ export const AUTHOR = "h1p";
 
 export const SITE = "https://blog-sn1p3r.tech";
 export const BASE = "/";
+export const DEFAULT_OG = "og2.png"

@@ -8,13 +8,14 @@ import BlogHeader from "../components/blog-content/BlogHeader.astro";
 
 type Props = CollectionEntry<"blog">["data"] & {
   headings: MarkdownHeading[];
+  image?: string;
 };
 
 const props = Astro.props;
-const { title, description, headings } = props;
+const { title, description, headings, image } = props;
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout title={title} description={description} image={image}>
   <main>
     <BlogHeader {...props} />
     <hr class="mb-8 mt-4 border-contentSubtle border-opacity-40" />

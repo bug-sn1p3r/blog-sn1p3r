@@ -77,7 +77,7 @@ waymore -i "target.com" -mode U -url-filename -p 4
 ```
 #### Output
 
-![output waymore](./images/P2/1.png)
+![output waymore](/images/P2/1.png)
 
 ### Paramspider
 ```bash
@@ -86,7 +86,7 @@ paramspider -d "target.com"
 ```
 #### Output
 
-![output paramspider](./images/P2/2.png)
+![output paramspider](/images/P2/2.png)
 
 ---
 
@@ -109,9 +109,9 @@ cat paramspiders_output.txt waymore.txt > urls.txt
 cat urls.txt | gf xss | uro | qsreplace '"><img src=X onerror=alert(1);>' | freq | grep "FOUND"
 ```
 
-![alt text](./images/P2/3.png)
+![alt text](/images/P2/3.png)
 
-![alt text](./images/P2/4.png)
+![alt text](/images/P2/4.png)
 
 Aquí concluye una parte de la automatización. Como pueden ver, es bastante útil, pero no es infalible, ya que a veces puede generar falsos positivos. Yo no me desanimo de lo contrario, cuando el parámetro enviado a qsreplace se refleje en freq, pero la carga útil no se refleje, ahi es donde mas me enfoco mas en la caza manual para tratar de explotar todos los parámetros reflejados en busca de XSS y no confiar al 100% en los resultados de freq. Primero, abrimos el proxy Burp, instalamos la extensión Open Múltiple URLs en el navegador y Logger++ en Burp.
 
@@ -120,16 +120,16 @@ Aquí concluye una parte de la automatización. Como pueden ver, es bastante út
 
 Esta metodología está basada en la revisión manual de 1x1 de todas las urls colectadas y revisión de sus parámetros, se trata de copiar todos los puntos finales recolectados gracias al "fingerprint" de paramspider y waymore o sea las urls.txt, vamos al open múltiple urls y pegamos todas las urls y le damos open.
 
-![alt text](./images/P2/5.png)
+![alt text](/images/P2/5.png)
 
 me gusta marcar las opciones no cargar hasta abrir la pestaña, cargar en un orden aleatorio e ignorar urls duplicadas, para tener un mejor control y que cuando sean muchas urls no explote el navegador je, je, le damos open urls, ahora veremos todas las peticiones procesadas en el burpsuite y filtraremos por las que reflejan parámetros.
 
-![alt text](./images/P2/6.png)
+![alt text](/images/P2/6.png)
 
 ---
 por ejemplo, típico parámetro que se refleja
 
-![alt text](./images/P2/9.png)
+![alt text](/images/P2/9.png)
 
 
 Normalmente se comienza por tratar de romper la sintaxis, entonces se envian caracteres especiales como estos
@@ -154,7 +154,7 @@ de esta manera pude escapar de ahi
 XSS?';alert(1)
 ```
 
-![alt text](./images/P2/10.png)
+![alt text](/images/P2/10.png)
 
 También puedes usar estas tools online para codificar(**Unicode**, **Hex code**, **HTML code**, **HTML entity**) caracteres especiales por si hay escape o codificación en los parámetros recibidos.
 
@@ -170,9 +170,9 @@ Es muy importante entender que esta parte manual requiere enfoque en el comporta
 <img src="x"onerror=javascriptt:alert(document.domain)> // esta si se refleja
 ```
 
-![alt text](./images/P2/7.png)
+![alt text](/images/P2/7.png)
 
-![alt text](./images/P2/8.png)
+![alt text](/images/P2/8.png)
 
 ## Conclusión
 Aunque no es un post con técnicas avanzadas ni para expertos, indico las bases o por lo menos como iniciar en la búsqueda de XSS, la combinación de herramientas automatizadas y verificación manual es crucial para identificar y explotar vulnerabilidades XSS de manera efectiva. Aunque la automatización ayuda a ahorrar tiempo y a identificar posibles puntos de inyección, la revisión manual asegura la precisión y la validez de los hallazgos. La seguridad web es un campo dinámico y en constante evolución, por lo que mantenerse actualizado con las últimas técnicas y herramientas es fundamental para cualquier pentester web.

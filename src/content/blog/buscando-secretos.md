@@ -35,31 +35,31 @@ Aquí unas cuantas dorks de las que mas utilizo en estos casos:
 - buscamos files .log: 
 > ```site:target.com ext:log```
 
-![alt text](./images/P3/log1.png)
+![alt text](/images/P3/log1.png)
 
-![alt text](./images/P3/log2.png)
+![alt text](/images/P3/log2.png)
 
 normalmente estos contienen rutas, variables de entorno, información del SO y otros detalles que pueden ser relevantes.
 
 - buscamos todo tipo de posibles files de backups: 
 > ```site:target.com ext:bkf | ext:bkp | ext:bak | ext:old | ext:backup```
 
-![alt text](./images/P3/bak1.png)
-![alt text](./images/P3/bak2.png)
-![alt text](./images/P3/bak3.png)
+![alt text](/images/P3/bak1.png)
+![alt text](/images/P3/bak2.png)
+![alt text](/images/P3/bak3.png)
 
 esta búsqueda es especial por que te puedes encontrar desde *backups completos*, hasta archivos de *configuración antiguos*, *copias parciales de dbs*, estructuras y *esquemas de dbs*, *código fuente*, etc.
 
 - buscando phpinfo exposed
 > ```ext:php intitle:phpinfo 'published by the PHP Group```
 
-![alt text](./images/P3/phpinfo.png)
+![alt text](/images/P3/phpinfo.png)
 
-![alt text](./images/P3/phpinfo3.png)
+![alt text](/images/P3/phpinfo3.png)
 
 aunque para muchos el phpinfo no representa un peligro, hay organizaciones que se toman el mas mínimo dato expuesto muy enserio por ejemplo este encuentro reciente.
 
-![alt text](./images/P3/phpinfo2.png)
+![alt text](/images/P3/phpinfo2.png)
 
 esto permite extraer detalles sobre la configuración del PHP, version exacta del SO, ip internas, variables de entorno del servidor.
 
@@ -76,13 +76,13 @@ esto permite extraer detalles sobre la configuración del PHP, version exacta de
 
 > ```ext:php | ext:txt intext:"DB_HOST ="```
 
-![alt text](./images/P3/pwd_php.png)
+![alt text](/images/P3/pwd_php.png)
 
-![alt text](./images/P3/pwd_php2.png)
+![alt text](/images/P3/pwd_php2.png)
 
 inclusive una de las anteriores me ayudo a encontrar un LFI.
 
-![alt text](./images/P3/pwd_php3.png)
+![alt text](/images/P3/pwd_php3.png)
 
 
 - También puedes usar esta para buscar archivos de configuración.
@@ -172,11 +172,11 @@ cat allUrls.txt | grep "config\.js" |sort -u | uro| httpx -sc -title -mc 200
 # httpx = -status-code -title -mc 200 , realizamos petición para validar que esta online con status code 200
 ```
 
-![alt text](./images/P3/image-3.png)
+![alt text](/images/P3/image-3.png)
 
-![alt text](./images/P3/image-1.png)
+![alt text](/images/P3/image-1.png)
 
-![alt text](./images/P3/image-2.png)
+![alt text](/images/P3/image-2.png)
 
 ![alt text](image.png)
 
@@ -185,11 +185,11 @@ También he encontrado cositas en env.js
 ```bash
 cat allUrls.txt | grep "env\.js" |sort -u | uro| httpx -sc -title -mc 200
 ```
-![alt text](./images/P3/env.png)
+![alt text](/images/P3/env.png)
 
-![alt text](./images/P3/env2.png)
+![alt text](/images/P3/env2.png)
 
-![alt text](./images/P3/env3.png)
+![alt text](/images/P3/env3.png)
 
 
 

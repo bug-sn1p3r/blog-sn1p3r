@@ -4,6 +4,8 @@ import {
   Shield,
   SquareTerminal,
   SquareChevronRight,
+  SearchCode,
+  Scale,
 } from "lucide-astro";
 
 type Props = {
@@ -16,4 +18,6 @@ const { postType } = Astro.props;
 {postType === "programming" && <FileCode2 />}
 {postType === "security" && <Shield />}
 {postType === "hacking" && <SquareTerminal />}
+{postType === "osint" && <SearchCode />}
+{postType == "terms" && <Scale />}
 {postType === "" && <SquareChevronRight />}
