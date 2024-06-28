@@ -166,7 +166,7 @@ Al buscar secretos y credenciales, es fundamental enfocarse en ciertos archivos 
 Una vez entendido este método empezamos a ejecutar la búsqueda de los archivos, lo haremos buscando estos nombres de archivos en toda las urls colectadas anteriormente allUrls.txt, para luego validar cual esta activa y online.
 
 ```bash
-cat allUrls.txt | grep "config\.js" |sort -u | uro| httpx -sc -title -mc 200
+cat allUrls.txt | grep "config\.js" | sort -u | uro | httpx -sc -title -mc 200
 #grep = filter
 # sort + uro = unificar
 # httpx = -status-code -title -mc 200 , realizamos petición para validar que esta online con status code 200
