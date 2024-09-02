@@ -1,5 +1,5 @@
 ---
-title: "Dorking, Fingerprints y mas Técnicas para Encontrar Información Sensible"
+title: "Dorking, Fingerprints y mas Técnicas para Encontrar Información Sensible #1"
 description: "En este Post quiero enseñar un poco de los métodos que utilizo para buscar secretos o credenciales, usando desde el google Dorking, hasta herramientas para colectar todo de los crawlers y tener mas posibilidad de éxito."
 pubDate: "Jun 22 2024"
 heroImage: "/images/P3/place-holder.jpg"

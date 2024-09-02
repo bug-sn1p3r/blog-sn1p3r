@@ -5,8 +5,8 @@ pubDate: "Jun 01 2024"
 heroImage: "/blog-placeholder-1.jpg"
 postType: "terms"
 tags:
-- terms
-- ética
+    - terms
+    - ética
 ---
 
 El contenido publicado en este blog tiene fines exclusivamente educativos y está destinado a proporcionar información sobre hacking ético, herramientas de seguridad, y metodologías de programas de recompensas por errores (bug bounty). Todo el material aquí presentado se ofrece con la intención de promover buenas prácticas de seguridad y una comprensión más profunda de la ciberseguridad.
