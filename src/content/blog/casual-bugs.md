@@ -6,9 +6,9 @@ heroImage: "/images/P4/images/P4/f1.jpg"
 postType: "bugbounty"
 tags: 
   - bugbounty
-  - XSS-DOM
+  - xss-DOM
   - sessions
-  - HTML-injection
+  - html-injection
 ---
 
 # Casual bugs
