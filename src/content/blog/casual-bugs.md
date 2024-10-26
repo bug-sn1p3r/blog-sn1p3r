@@ -87,7 +87,7 @@ Este bug permite que un atacante manipule el contenido de los correos electróni
 - Target - redacted 
 - Type - VDP
 - Bounty - NA
-- Status - Pendiente por definir
+- Status - Resuelto
 
 Recientemente, descubrí dos vulnerabilidades de **XSS basadas en DOM** a través del **CVE-2022-29455** en el plugin de builder de páginas *Elementor*. Esta vulnerabilidad permite la inyección de código JavaScript malicioso, lo que podría ser explotado por atacantes.
 
