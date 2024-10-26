@@ -9,7 +9,7 @@ const blog = defineCollection({
     description: z.string(),
     pubDate: z.coerce.date(),
     heroImage: z.string().optional().default(getUrlWithBase(DEFAULT_OG)),
-    postType: z.enum(["security", "programming", "hacking", "terms", "osint", "bugbounty"]),
+    postType: z.enum(["security", "programming", "hacking", "terms", "osint", "bugbounty", "tools"]),
     tags: z
       .array(
         z
