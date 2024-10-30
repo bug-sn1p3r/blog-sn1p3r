@@ -2,7 +2,6 @@
 title: "Ataques a los headers del host"
 description: "En este post hablaremos un poco de los ataques de inyección de encabezados, como extra incluiré una herramienta sencilla que he creado con la intención de automatizar posibles inyecciones de encabezados."
 pubDate: "Oct 30 2024"
-heroImage: "/images/P4/images/P4/f1.jpg"
 postType: "hacking"
 tags: 
   - tools

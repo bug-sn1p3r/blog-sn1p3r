@@ -2,7 +2,7 @@
 title: "Casual bugs #1"
 description: "En este post, compartiré algunos bugs que he encontrado de manera inesperada y fortuita. La intención es demostrar que las vulnerabilidades pueden estar en cualquier lugar; solo necesitas saber cómo buscarlas o quizás un poco de suerte."
 pubDate: "Sept 02 2024"
-heroImage: "/images/P4/images/P4/f1.jpg"
+heroImage: "/images/P4/f1.jpg"
 postType: "bugbounty"
 tags: 
   - bugbounty

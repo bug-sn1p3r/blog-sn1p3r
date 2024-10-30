@@ -2,7 +2,6 @@
 title: "Aviso Legal"
 description: "Sección donde los usuarios encontrarán información sobre las responsabilidades y condiciones de uso del contenido de este blog."
 pubDate: "Jun 01 2024"
-heroImage: "/blog-placeholder-1.jpg"
 postType: "terms"
 tags:
     - terms
