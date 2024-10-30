@@ -178,7 +178,7 @@ cat allUrls.txt | grep "config\.js" | sort -u | uro | httpx -sc -title -mc 200
 
 ![alt text](/images/P3/image-2.png)
 
-![alt text](image.png)
+![alt text](/images/P3/image.png)
 
 También he encontrado cositas en env.js
 

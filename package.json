@@ -14,7 +14,7 @@
     "@astrojs/rss": "4.0.6",
     "@astrojs/sitemap": "3.1.5",
     "@astrojs/tailwind": "5.1.0",
-    "astro": "4.9.1",
+    "astro": "^4.9.1",
     "astro-expressive-code": "0.35.3",
     "cobe": "0.6.3",
     "lucide-astro": "0.379.0",
