@@ -49,7 +49,7 @@ User-Agent: Mozilla/5.0
 Solicitud HTTP Modificada por el Atacante:
 ```
 GET /index.html HTTP/1.1
-Host: example.com\nX-Injected-Header: evil.com.co
+Host: example.com\nX-Forwarded-For: evil.com.co
 User-Agent: Mozilla/5.0
 ```
 
@@ -173,7 +173,7 @@ El script incluye varios métodos para inyectar encabezados maliciosos, como:
 - X-Host
 
 Verificación de Protocolos:
-A través de la función check_protocols, el script intenta establecer conexiones HTTPS con los dominios listados y verifica si los encabezados inyectados tienen un efecto en la respuesta del servidor. Si el encabezado malicioso es reflejado, se registra como un hallazgo.
+A través de la función check_protocols, el script intenta establecer conexiones HTTPS(en proximos updates, soportara multiples protocolos y multiples metodos)con los dominios listados y verifica si los encabezados inyectados tienen un efecto en la respuesta del servidor. Si el encabezado malicioso es reflejado, se registra como un hallazgo.
 
 ![alt text](/images/P5/image-1.png)
 
