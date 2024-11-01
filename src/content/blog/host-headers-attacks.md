@@ -13,8 +13,7 @@ tags:
 
 Las aplicaciones web hoy en día son un componente vital del internet moderno y, como tal, están constantemente amenazadas por una variedad de ataques o técnicas que afecten su funcionamiento.
 
-Uno de estos ataques es el "**Host Header Injection**" o la inyección de encabezado de host, esto permite que un atacante pueda eludir o evadir los controles de seguridad y obtener acceso no autorizado a datos confidenciales o funcionalidades en una aplicación web.
-Esta vulnerabilidad está relacionada principalmente con varias categorías de **Common Weakness Enumeration (CWE)**.
+Uno de estos ataques es el "**Host Header Injection**" o la inyección de encabezado de host, esto permite que un atacante pueda eludir o evadir los controles de seguridad y obtener acceso no autorizado a datos confidenciales o funcionalidades en una aplicación web, parte interesante porque una de las metodologías para el Hacking web es, la capacidad de jugar y tratar de "burlar" las respuestas del servidor, por eso esta vulnerabilidad está relacionada principalmente con varias categorías de **Common Weakness Enumeration (CWE)**.
 
 [CWE-20: Improper Input Validation](https://cwe.mitre.org/data/definitions/20.html)
 <br>
@@ -24,13 +23,24 @@ Esta vulnerabilidad está relacionada principalmente con varias categorías de *
 
 En este Post, resumiremos un poco que es la **inyeccion de encabezado de host**, como funciona, como identificarla y como prevenirla.
 
-### ¿Qué es Host Header Injection?
+### Funcionamiento de una peticion HTTP
 
-El **Host Header Injection** es un ataque que explota la forma en que los servidores web y las aplicaciones manejan el encabezado de host en las solicitudes HTTP. El encabezado *Host* forma parte del protocolo HTTP/1.1 y se utiliza para especificar el nombre de dominio del servidor (**host virtual**) al que el cliente desea conectarse.
+Cuando un cliente envía una solicitud HTTP a un servidor web, incluye un encabezado Host en la solicitud que especifica el nombre de dominio del servidor al que desea conectarse. Por ejemplo, si un usuario escribe "www.google.com" en su navegador, el navegador enviará una solicitud HTTP con el encabezado Host establecido en "www.google.com"
 
-Cuando un cliente envía una solicitud HTTP a un servidor web, incluye un encabezado Host en la solicitud que especifica el nombre de dominio del servidor al que desea conectarse. Por ejemplo, si un usuario escribe "www.example.com" en su navegador, el navegador enviará una solicitud HTTP con el encabezado Host establecido en "www.example.com".
+Asi es como se veria una peticion simple sin encabezados adicionales HTTP a www.google.com, en su versión HTTP/1.1 donde se logra evidenciar el encabezado **Host** con su valor **www.google.com**:
+
+```http
+GET /path HTTP/1.1
+Host: www.google.com
+```
 
 Sin embargo, si un atacante puede **manipular** el encabezado **Host** en la solicitud **HTTP**, puede engañar al servidor web para que piense que la solicitud proviene de un dominio diferente. Esto puede permitirles eludir los controles de seguridad y obtener acceso no autorizado a datos confidenciales o funcionalidades de la aplicación web.
+
+### ¿Qué es Host Header Injection?
+
+El **Host Header Injection** es un ataque que explota la forma en que los servidores web y las aplicaciones manejan los encabezados en las solicitudes HTTP.
+
+Con el ultimo estandar el HTTP/2.0, la estructura del encabezado Host sigue presente, el protocolo introduce una mayor eficiencia en el envío de múltiples solicitudes sobre una sola conexión y nuevas vulnerabilidades relacionadas con la manipulación de encabezados. HTTP/2.0 también utiliza la misma compresión de encabezados, lo que podría abrir nuevas superficies, posibilidades y tecnicas de ataque si el encabezado Host es manipulado, permitiendo a un atacante influir en cómo se enrutan las solicitudes a servidores o servicios específicos.
 
 ### ¿Cómo funciona la inyección de encabezado de host?
 
@@ -40,13 +50,13 @@ Hay varias formas en que un atacante puede realizar un ataque de inyección de e
 Valor de encabezado de host con formato incorrecto: un atacante puede inyectar un valor de encabezado de host con formato incorrecto en la solicitud HTTP. Por ejemplo, pueden incluir un carácter de nueva línea en el valor del encabezado para crear un nuevo campo de encabezado.
 
 Solicitud HTTP Original:
-```
+```http
 GET /index.html HTTP/1.1
 Host: example.com
 User-Agent: Mozilla/5.0
 ```
 Solicitud HTTP Modificada por el Atacante:
-```
+```http
 GET /index.html HTTP/1.1
 Host: example.com\nX-Forwarded-For: evil.com.co
 User-Agent: Mozilla/5.0
@@ -58,13 +68,13 @@ En este ejemplo, el atacante ha incluido un valor de encabezado Host malintencio
 Varios valores de encabezado de host: un atacante puede inyectar varios valores de encabezado de host en la solicitud HTTP. Por lo general, el servidor web solo leerá el primer valor del encabezado Host, pero algunos servidores también pueden leer los valores posteriores.
 
 Solicitud HTTP Original:
-```
+```http
 GET /index.html HTTP/1.1
 Host: example.com
 User-Agent: Mozilla/5.0
 ```
 Solicitud HTTP Modificada por el Atacante:
-```
+```http
 GET /index.html HTTP/1.1
 Host: example.com, evil.com.co
 User-Agent: Mozilla/5.0
@@ -75,7 +85,7 @@ o
 <br>
 
 Solicitud HTTP Modificada por el Atacante:
-```
+```http
 GET /index.html HTTP/1.1
 Host: example.com
 Host: evil.com.co
@@ -87,14 +97,14 @@ En este ejemplo, el atacante ha suplantado o a sobreescrito el valor del encabez
 Encabezado de host suplantado: un atacante puede suplantar el encabezado de host en la solicitud HTTP para que parezca que la solicitud proviene de un dominio diferente. Por ejemplo, pueden establecer el encabezado Host en un subdominio del dominio de destino.
 
 Solicitud HTTP Original:
-```
+```http
 GET /dashboard HTTP/1.1
 Host: example.com
 User-Agent: Mozilla/5.0
 ```
 
 Solicitud HTTP Modificada por el Atacante:
-```
+```http
 GET /dashboard HTTP/1.1
 Host: admin.example.com
 User-Agent: Mozilla/5.0
@@ -104,14 +114,14 @@ User-Agent: Mozilla/5.0
 En otro ejemplo el atacante puede incluir encabezados inesperados buscando que el servidor los interprete, si el servidor web no ignora o no esta correctamente configurado para ignorar encabezados no establecidos como por ejemplo X-Forwarded-Host o X-Forwarded-For, los puede interpretar como parte de la peticion, lo que podria permitir que el atacante ejecute un ataque exitoso.
 
 Solicitud HTTP Original:
-```
+```http
 GET /home HTTP/1.1
 Host: example.com
 User-Agent: Mozilla/5.0
 ```
 
 Solicitud HTTP modificada por el Atacante:
-```
+```http
 GET /home HTTP/1.1
 Host: example.com
 X-Forwarded-Host: evil.com.co
@@ -172,7 +182,7 @@ El script incluye varios métodos para inyectar encabezados maliciosos, como:
 - X-Host
 
 Verificación de Protocolos:
-A través de la función check_protocols, el script intenta establecer conexiones HTTPS(en proximos updates, soportara multiples protocolos y multiples metodos)con los dominios listados y verifica si los encabezados inyectados tienen un efecto en la respuesta del servidor. Si el encabezado malicioso es reflejado, se registra como un hallazgo.
+A través de la función check_protocols, el script intenta establecer conexiones HTTPS(en proximos updates, soportara multiples protocolos y multiples metodos)con los dominios listados y verifica si los encabezados inyectados tienen un efecto en la respuesta del servidor. Si el encabezado malicioso es reflejado, se registra como un hallazgo, lo que podemos usar como punto inicial para tratar de explotar la vulnerabilidad.
 
 ![alt text](/images/P5/image-1.png)
 
@@ -181,7 +191,7 @@ En la imagen anterior logran evidenciar como manifiesta la tool un hallazgo, ade
 
 
 
-La explotacion la veremos en la Segunda parte del POST pero aca les dejo un ejemplo rapido.
+La explotacion la veremos en la Segunda parte del POST pero aca les dejo un ejemplo rapido, de una redireccion directa al ingresar un encabezado no esperado por el servidor.
 
 ![alt text](/images/P5/image-2.png)
 
