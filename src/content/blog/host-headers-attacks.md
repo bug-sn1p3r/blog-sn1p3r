@@ -21,7 +21,7 @@ Uno de estos ataques es el "**Host Header Injection**" o la inyección de encabe
 <br>
 [CWE-441: Unintended Proxy or Intermediary](https://cwe.mitre.org/data/definitions/441.html)
 
-En este Post, resumiremos un poco que es la **inyeccion de encabezado de host**, como funciona, como identificarla y como prevenirla.
+En este Post, resumiremos un poco que es la **inyección de encabezado de host**, como funciona, como identificarla y como prevenirla.
 
 ### Funcionamiento de una peticion HTTP
 
@@ -40,7 +40,7 @@ Sin embargo, si un atacante puede **manipular** el encabezado **Host** en la sol
 
 El **Host Header Injection** es un ataque que explota la forma en que los servidores web y las aplicaciones manejan los encabezados en las solicitudes HTTP.
 
-Con el ultimo estandar el HTTP/2.0, la estructura del encabezado Host sigue presente, el protocolo introduce una mayor eficiencia en el envío de múltiples solicitudes sobre una sola conexión y nuevas vulnerabilidades relacionadas con la manipulación de encabezados. HTTP/2.0 también utiliza la misma compresión de encabezados, lo que podría abrir nuevas superficies, posibilidades y tecnicas de ataque si el encabezado Host es manipulado, permitiendo a un atacante influir en cómo se enrutan las solicitudes a servidores o servicios específicos.
+Con el ultimo estándar el HTTP/2.0, la estructura del encabezado Host sigue presente, el protocolo introduce una mayor eficiencia en el envío de múltiples solicitudes sobre una sola conexión y nuevas vulnerabilidades relacionadas con la manipulación de encabezados. HTTP/2.0 también utiliza la misma compresión de encabezados, lo que podría abrir nuevas superficies, posibilidades y técnicas de ataque si el encabezado Host es manipulado, permitiendo a un atacante influir en cómo se enrutan las solicitudes a servidores o servicios específicos.
 
 ### ¿Cómo funciona la inyección de encabezado de host?
 
@@ -111,7 +111,7 @@ User-Agent: Mozilla/5.0
 ```
 ---
 
-En otro ejemplo el atacante puede incluir encabezados inesperados buscando que el servidor los interprete, si el servidor web no ignora o no esta correctamente configurado para ignorar encabezados no establecidos como por ejemplo X-Forwarded-Host o X-Forwarded-For, los puede interpretar como parte de la peticion, lo que podria permitir que el atacante ejecute un ataque exitoso.
+En otro ejemplo el atacante puede incluir encabezados inesperados buscando que el servidor los interprete, si el servidor web no ignora o no esta correctamente configurado para ignorar encabezados no establecidos como por ejemplo X-Forwarded-Host o X-Forwarded-For, los puede interpretar como parte de la petición, lo que podría permitir que el atacante ejecute un ataque exitoso.
 
 Solicitud HTTP Original:
 ```http
@@ -132,7 +132,7 @@ User-Agent: Mozilla/5.0
 
 ### Impacto
 
-Una vez el atacante ha inyectado con exito un valor de encabezado de host malicioso, puede realizar una series de ataques entre ellos estan o se conocen los siguientes:
+Una vez el atacante ha inyectado con éxito un valor de encabezado de host malicioso, puede realizar una series de ataques entre ellos están o se conocen los siguientes:
 
 <ul>
 <li>Password reset poisoning</li>
@@ -182,7 +182,7 @@ El script incluye varios métodos para inyectar encabezados maliciosos, como:
 - X-Host
 
 Verificación de Protocolos:
-A través de la función check_protocols, el script intenta establecer conexiones HTTPS(en proximos updates, soportara multiples protocolos y multiples metodos)con los dominios listados y verifica si los encabezados inyectados tienen un efecto en la respuesta del servidor. Si el encabezado malicioso es reflejado, se registra como un hallazgo, lo que podemos usar como punto inicial para tratar de explotar la vulnerabilidad.
+A través de la función check_protocols, el script intenta establecer conexiones HTTPS(en próximos updates, soportara multiples protocolos y multiples métodos)con los dominios listados y verifica si los encabezados inyectados tienen un efecto en la respuesta del servidor. Si el encabezado malicioso es reflejado, se registra como un hallazgo, lo que podemos usar como punto inicial para tratar de explotar la vulnerabilidad.
 
 ![alt text](/images/P5/image-1.png)
 
@@ -191,7 +191,7 @@ En la imagen anterior logran evidenciar como manifiesta la tool un hallazgo, ade
 
 
 
-La explotacion la veremos en la Segunda parte del POST pero aca les dejo un ejemplo rapido, de una redireccion directa al ingresar un encabezado no esperado por el servidor.
+La explotación la veremos en la Segunda parte del POST pero aca les dejo un ejemplo rápido, de una redirection directa al ingresar un encabezado no esperado por el servidor.
 
 ![alt text](/images/P5/image-2.png)
 
